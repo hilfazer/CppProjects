@@ -1,0 +1,30 @@
+<RCC>
+  <qresource prefix="difficulty">
+    <file>apo4_icon.jpg</file>
+    <file>easy_icon.jpg</file>
+  </qresource>
+  <qresource prefix="ruins">
+    <file>scavenge_gold_icon.png</file>
+  </qresource>
+  <qresource prefix="day">
+    <file>day_icon.jpg</file>
+  </qresource>
+  <qresource prefix="undo">
+    <file>undo_icon.jpg</file>
+  </qresource>
+  <qresource prefix="house">
+    <file>house_expansion_icon.png</file>
+    <file>house_icon.jpg</file>
+  </qresource>
+  <qresource prefix="shop">
+    <file>upg_shop_prices1_icon.png</file>
+    <file>upg_shop_prices2_icon.png</file>
+  </qresource>
+  <qresource prefix="mine">
+    <file>gold_mine_icon.jpg</file>
+    <file>upg_mine_prod_icon.png</file>
+    <file>upg_mine_worker1_icon.png</file>
+    <file>upg_mine_worker2_icon.png</file>
+    <file>use_mine_icon.png</file>
+  </qresource>
+</RCC>
