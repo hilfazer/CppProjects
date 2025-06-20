@@ -1,0 +1,8 @@
+*.idx
+*.obj
+*.pdb
+
+
+
+_builds
+.qtc_clangd
