@@ -1,0 +1,21 @@
+
+::Mickey
+
+Interval key: minor sixth, major second, minor sixth.
+
+Octave keys: 
+
+Key 1: 03641144414131844044
+Key *: 03644143041074444
+Key *: 0364117417413411441304143
+Key *: 036414411443131404140044101::
+
+
+::Mickey,
+
+Here's your text:
+
+FD#C FCAbCD#EBD D EFAbD#E
+C#D#EEBbAbFEBb B ECCF
+FD#C G D#D#EFD#Bb CC# CAFEBBbFECB
+D#CEFGCEE BEBC AbAbGCE BbAbC#D#EBbC
