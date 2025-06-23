@@ -1,5 +1,7 @@
 #include "Octave.hpp"
 
+const char SymbolArrays[3][13] = { {"ABCDEFGHIJKL"}, {"MNOPQRSTUVWX"}, {"YZ0123456789"} };
+
 
 Octave::Octave(unsigned number, unsigned transposition, unsigned symbolsIndex)
 {

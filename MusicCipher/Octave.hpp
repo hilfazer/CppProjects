@@ -11,7 +11,7 @@ QStringList const AllSemitones = StandardOctave + QStringList{"Db", "Eb", "Gb", 
 
 std::map<QString, QString> const FlatteredToSharpened = { {"Db", "C#"}, {"Eb", "D#"}, {"Gb", "F#"}, {"Ab", "G#"}, {"Bb", "A#"} };
 
-const char SymbolArrays[3][13] = { {"ABCDEFGHIJKL"}, {"MNOPQRSTUVWX"}, {"YZ0123456789"} };
+extern const char SymbolArrays[3][13];
 
 class Octave
 {
