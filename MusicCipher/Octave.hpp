@@ -9,7 +9,7 @@
 QStringList const StandardOctave = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 QStringList const AllSemitones = StandardOctave + QStringList{"Db", "Eb", "Gb", "Ab", "Bb"};
 
-std::map<QString, QString> const FlatteredToSharpened = { {"Db", "C#"}, {"Eb", "D#"}, {"Gb", "F#"}, {"Ab", "G#"}, {"Bb", "A#"} };
+std::map<QString, QString> const FlattenedToSharpened = { {"Db", "C#"}, {"Eb", "D#"}, {"Gb", "F#"}, {"Ab", "G#"}, {"Bb", "A#"} };
 
 extern const char SymbolArrays[3][13];
 

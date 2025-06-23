@@ -41,8 +41,8 @@ unsigned Octave::findSemitone(QString semitone) const
 
 QString Octave::normalize(const QString& semitone)
 {
-	if(FlatteredToSharpened.find(semitone) != FlatteredToSharpened.end())
-		return FlatteredToSharpened.at(semitone);
+	if(FlattenedToSharpened.find(semitone) != FlattenedToSharpened.end())
+		return FlattenedToSharpened.at(semitone);
 	else
 		return semitone;
 }
