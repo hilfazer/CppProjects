@@ -22,9 +22,10 @@ std::map<int, QString> extractStringsWithPositions(const QString& text, QStringL
 
 std::vector< std::map<int, QString> > filteredTextWithPositions(const QString& encodedText)
 {
-	QChar const space(' ');
+	static QRegularExpression const backslashHPlus("\\h+");
+	static QChar const space(' ');
 	QString text = encodedText;
-	text.replace(QRegularExpression("\\h+"), space);
+	text.replace(backslashHPlus, space);
 
 	std::map<int, QString> const textWithPositions = extractStringsWithPositions(
 	            text, AllSemitones + QStringList{space, "\n"});
@@ -63,7 +64,7 @@ std::vector< std::map<int, QString> > filteredTextWithPositions(const QString& e
 
 	std::vector< std::map<int, QString> > outputLines;
 
-	QStringList filteredLines = filteredText.trimmed().split('\n');
+	QStringList const filteredLines = filteredText.trimmed().split('\n');
 	for(QString const& line : filteredLines)
 		outputLines.push_back( extractStringsWithPositions(line, AllSemitones + QStringList{space}) );
 
@@ -91,7 +92,7 @@ std::map<QChar, std::map<QString, QChar>> mergeOctaves(std::vector<Octave> const
 QString decodeLineWithNumberOctave(Octave const& numberOctave, std::map<int, QString> encodedLine)
 {
 	QString line;
-	for ( auto pos2str : encodedLine )
+	for ( auto const& pos2str : encodedLine )
 	{
 		if(AllSemitones.contains(pos2str.second))
 		{
