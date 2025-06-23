@@ -31,13 +31,10 @@ private slots:
 	void updateOctaves();
 	void updateDecodeButton();
 	void updateEncodedTextWithOctaveNumbers();
-	void on_decodeButton_pressed();
-
-	void on_octaveAndIntervalKeysText_textChanged();
-
-	void on_decodedText_textChanged();
-
-	void on_clearDecodedButton_clicked();
+	void onDecodeButtonPressed();
+	void onOctaveAndIntervalKeysTextChanged();
+	void onDecodedTextChanged();
+	void onClearDecodedButtonClicked();
 
 private:
 	void setNumber( int number, QLineEdit* lineEdit);

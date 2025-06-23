@@ -71,6 +71,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect( ui->encodedText, SIGNAL(textChanged()), this, SLOT(updateDecodeButton()) );
 	connect( ui->encodedText, SIGNAL(textChanged()), this, SLOT(updateEncodedTextWithOctaveNumbers()) );
 	connect( this, SIGNAL(octaveKeysParsed()), this, SLOT(updateEncodedTextWithOctaveNumbers()) );
+	connect( ui->decodeButton, SIGNAL(pressed()), this, SLOT(onDecodeButtonPressed()) );
+	connect( ui->decodedText, SIGNAL(textChanged()), this, SLOT(onDecodedTextChanged()) );
+	connect( ui->clearDecodedButton, SIGNAL(clicked(bool)), this, SLOT(onClearDecodedButtonClicked()) );
+	connect( ui->octaveAndIntervalKeysText, SIGNAL(textChanged()), this, SLOT(onOctaveAndIntervalKeysTextChanged()) );
 }
 
 MainWindow::~MainWindow()
@@ -208,7 +212,7 @@ void MainWindow::updateEncodedTextWithOctaveNumbers()
 
 }
 
-void MainWindow::on_decodeButton_pressed()
+void MainWindow::onDecodeButtonPressed()
 {
 	ui->decodedText->clear();
 
@@ -224,12 +228,12 @@ void MainWindow::on_decodeButton_pressed()
 		ui->encodedText->toPlainText(), validOctaves, m_textAsOctaveNumbers);
 
 	if(decoded.size() != 0)
-	decoded.append( "\n\n\n\n\nHint:\n" + decodedNumbersHint );
+		decoded.append( "\n\n\n\n\nHint:\n" + decodedNumbersHint );
 
 	ui->decodedText->setText(decoded);
 }
 
-void MainWindow::on_octaveAndIntervalKeysText_textChanged()
+void MainWindow::onOctaveAndIntervalKeysTextChanged()
 {
 	IntervalParsingResults intervalResults = parseIntervalKey( ui->octaveAndIntervalKeysText->toPlainText() );
 
@@ -260,13 +264,13 @@ void MainWindow::on_octaveAndIntervalKeysText_textChanged()
 	emit octaveKeysParsed();
 }
 
-void MainWindow::on_decodedText_textChanged()
+void MainWindow::onDecodedTextChanged()
 {
     ui->clearDecodedButton->setEnabled( ui->decodedText->toPlainText().size() > 0 );
 	ui->decodedText->setEnabled(ui->decodedText->toPlainText().size() > 0);
 }
 
-void MainWindow::on_clearDecodedButton_clicked()
+void MainWindow::onClearDecodedButtonClicked()
 {
 	ui->decodedText->clear();
 }
