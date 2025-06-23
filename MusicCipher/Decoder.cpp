@@ -117,7 +117,7 @@ QString decodeText(
 
 	QStringList decodedLines;
 
-	unsigned const linesNumber = filteredLines.size();
+	std::size_t const linesNumber = filteredLines.size();
 	for(std::size_t lineIdx = 0; lineIdx < linesNumber; ++lineIdx)
 	{
 		if( int(lineIdx) >= textAsOctaveNumbers.size() )
