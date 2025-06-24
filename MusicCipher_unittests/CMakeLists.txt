@@ -2,12 +2,18 @@ cmake_minimum_required(VERSION 3.16)
 
 project(MusicCipherUnitTests LANGUAGES CXX)
 
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(MusicCipherUnitTests main.cpp)
+add_executable(MusicCipherUnitTests main.cpp
+    ../MusicCipher/Octave.cpp
+    Octave_unittests.cpp)
 add_test(NAME MusicCipherUnitTests COMMAND MusicCipherUnitTests)
 
 if (DEFINED ENV{BOOST_INCLUDE_DIR})
@@ -20,3 +26,9 @@ if (BOOST_INCLUDE_DIR STREQUAL "")
 elseif (EXISTS ${BOOST_INCLUDE_DIR})
     include_directories(${BOOST_INCLUDE_DIR})
 endif ()
+
+include_directories("../MusicCipher") # tested project
+
+find_package(Qt5 REQUIRED COMPONENTS Widgets )
+
+target_link_libraries(MusicCipherUnitTests PRIVATE Qt5::Widgets)
