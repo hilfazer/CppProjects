@@ -6,6 +6,15 @@
 
 #include  <stdexcept>
 
+
+namespace
+{
+
+QChar const SpaceSymbol{' '};
+QChar const UnknownSymbol{'?'};
+
+}
+
 std::map<int, QString> extractStringsWithPositions(const QString& text, QStringList const& toExtract)
 {
 	std::map<int, QString> extracted;
@@ -23,12 +32,11 @@ std::map<int, QString> extractStringsWithPositions(const QString& text, QStringL
 std::vector< std::map<int, QString> > filteredTextWithPositions(const QString& encodedText)
 {
 	static QRegularExpression const whitespaceCluster("\\h+");
-	static QChar const space(' ');
 	QString text = encodedText;
-	text.replace(whitespaceCluster, space);
+	text.replace(whitespaceCluster, SpaceSymbol);
 
 	std::map<int, QString> const textWithPositions = extractStringsWithPositions(
-	            text, AllSemitones + QStringList{space, "\n"});
+				text, AllSemitones + QStringList{SpaceSymbol, "\n"});
 
 	QString filteredText;
 	QString filteredLine;
@@ -53,9 +61,9 @@ std::vector< std::map<int, QString> > filteredTextWithPositions(const QString& e
 			}
 		}
 		else {
-			assert(pos2str.second == space);
+			assert(pos2str.second == SpaceSymbol);
 			filteredLine = filteredLine.trimmed();
-			filteredLine.append(space);
+			filteredLine.append(SpaceSymbol);
 		}
 	}
 
@@ -66,7 +74,7 @@ std::vector< std::map<int, QString> > filteredTextWithPositions(const QString& e
 
 	QStringList const filteredLines = filteredText.trimmed().split('\n');
 	for(QString const& line : filteredLines)
-		outputLines.push_back( extractStringsWithPositions(line, AllSemitones + QStringList{space}) );
+		outputLines.push_back( extractStringsWithPositions(line, AllSemitones + QStringList{SpaceSymbol}) );
 
 	return outputLines;
 }
@@ -135,20 +143,29 @@ QString decodeText(
 		QString line;
 		for(auto const& pos2piece : filteredEncodedLines[lineIdx])
 		{
-			QChar output(' ');
+			QChar output{SpaceSymbol};
+
+			if (!AllSemitones.contains(pos2piece.second))
+			{
+				line.append(output);
+				continue;
+			}
+
 			QString const textPiece = Octave::normalize(pos2piece.second);
 			if(AllSemitones.contains(textPiece) && octaveNumberIt != textAsOctaveNumbers[int(lineIdx)].end())
 			{
 				try {
-					output = mergedOctaves.at(*octaveNumberIt++).at(textPiece);
+					auto const semitone2decodedSymbol = mergedOctaves.at(*octaveNumberIt++);
+					output = semitone2decodedSymbol.at(textPiece);
 				}
 				catch (std::out_of_range const&) {
-					output = '?';
+					output = UnknownSymbol;
 				}
 			}
 			else {
-				output = '_';
+				output = SpaceSymbol;
 			}
+
 			line.append(output);
 		}
 
@@ -161,4 +178,3 @@ QString decodeText(
 
 	return decodedText;
 }
-
