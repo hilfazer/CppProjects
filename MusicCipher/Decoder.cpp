@@ -113,11 +113,11 @@ QString decodeText(
 {
 	auto const mergedOctaves = mergeOctaves(octaves);
 	Octave const* numberOctave = (octaves.size() > 2) ? &octaves[2] : nullptr;
-	std::vector< std::map<int, QString> > filteredLines = filteredTextWithPositions(encodedText);
+	std::vector< std::map<int, QString> > filteredEncodedLines = filteredTextWithPositions(encodedText);
 
 	QStringList decodedLines;
 
-	std::size_t const linesNumber = filteredLines.size();
+	std::size_t const linesNumber = filteredEncodedLines.size();
 	for(std::size_t lineIdx = 0; lineIdx < linesNumber; ++lineIdx)
 	{
 		if( int(lineIdx) >= textAsOctaveNumbers.size() )
@@ -125,7 +125,7 @@ QString decodeText(
 			if(!numberOctave)
 				continue;
 
-			QString line = decodeLineWithNumberOctave(*numberOctave, filteredLines[lineIdx]);
+			QString line = decodeLineWithNumberOctave(*numberOctave, filteredEncodedLines[lineIdx]);
 			if(line.size() != 0)
 				decodedLines.append(line);
 			continue;
@@ -133,14 +133,14 @@ QString decodeText(
 
 		auto octaveNumberIt = textAsOctaveNumbers[int(lineIdx)].begin();
 		QString line;
-		for(auto const& pos2str : filteredLines[lineIdx])
+		for(auto const& pos2piece : filteredEncodedLines[lineIdx])
 		{
 			QChar output(' ');
-			QString const str = Octave::normalize(pos2str.second);
-			if(AllSemitones.contains(str) && octaveNumberIt != textAsOctaveNumbers[int(lineIdx)].end())
+			QString const textPiece = Octave::normalize(pos2piece.second);
+			if(AllSemitones.contains(textPiece) && octaveNumberIt != textAsOctaveNumbers[int(lineIdx)].end())
 			{
 				try {
-					output = mergedOctaves.at(*octaveNumberIt++).at(str);
+					output = mergedOctaves.at(*octaveNumberIt++).at(textPiece);
 				}
 				catch (std::out_of_range const&) {
 					output = '?';
