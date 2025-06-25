@@ -13,6 +13,11 @@ std::map<QString, QString> const FlattenedToSharpened = { {"Db", "C#"}, {"Eb", "
 
 extern const char SymbolArrays[3][13];
 
+class NotASemitoneException : std::exception
+{
+	// TODO implement what()
+};
+
 class Octave
 {
 public:
