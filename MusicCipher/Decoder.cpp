@@ -86,7 +86,7 @@ std::map<QChar, std::map<QString, QChar>> mergeOctaves(std::vector<Octave> const
 
 	for(Octave const& octave : octaves)
 	{
-		for(unsigned i = 0; i < octave.length; ++i)
+		for(unsigned i = 0; i < octave.octaveLength; ++i)
 		{
 			QChar number = QString::number(octave.getOctaveNumber(i)).at(0);
 			mergedOctaves[ number ][octave.getSemitone(i)] = octave.getSymbol(i);

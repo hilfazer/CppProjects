@@ -3,33 +3,33 @@
 const char SymbolArrays[3][13] = { {"ABCDEFGHIJKL"}, {"MNOPQRSTUVWX"}, {"YZ0123456789"} };
 
 
-Octave::Octave(unsigned number, unsigned transposition, unsigned symbolsIndex)
+Octave::Octave(unsigned startingNumber, unsigned transposition, unsigned symbolsIndex)
 {
 	assert(symbolsIndex < 3);
 	m_symbolsIndex = symbolsIndex;
 
-	for (unsigned i = 0; i < length; ++i)
+	for (unsigned i = 0; i < octaveLength; ++i)
 	{
-		m_numbers.push_back( number + (i + transposition) / length );
-		m_semitones.append( StandardOctave[(i + transposition) % length] );
+		m_numbers.push_back( startingNumber + (i + transposition) / octaveLength );
+		m_semitones.append( StandardOctave[(i + transposition) % octaveLength] );
 	}
 }
 
 QString Octave::getSemitone(unsigned idx) const
 {
-	assert(idx < length);
+	assert(idx < octaveLength);
 	return m_semitones[int(idx)];
 }
 
 unsigned Octave::getOctaveNumber(unsigned idx) const
 {
-	assert(idx < length);
+	assert(idx < octaveLength);
 	return m_numbers[idx];
 }
 
 char Octave::getSymbol(unsigned idx) const
 {
-	assert(idx < length);
+	assert(idx < octaveLength);
 	return SymbolArrays[m_symbolsIndex][idx];
 }
 

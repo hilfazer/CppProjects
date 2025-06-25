@@ -21,10 +21,10 @@ class NotASemitoneException : std::exception
 class Octave
 {
 public:
-	static unsigned const length = 12;
+	static unsigned const octaveLength = 12;
 
 public:
-	Octave(unsigned number, unsigned transposition, unsigned symbolsIndex );
+	Octave(unsigned startingNumber, unsigned transposition, unsigned symbolsIndex );
 
 	QString getSemitone(unsigned idx) const;
 
