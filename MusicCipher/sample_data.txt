@@ -1,21 +1,25 @@
 
+
 ::Mickey
 
-Interval key: minor sixth, major second, minor sixth.
+Interval key: major third, perfect unison, minor seventh.
 
 Octave keys: 
 
-Key 1: 03641144414131844044
-Key *: 03644143041074444
-Key *: 0364117417413411441304143
-Key *: 036414411443131404140044101::
+Key 1: 0630660*6*6000*66064
+Key *: 0636066*0*6707*606760066100
+Key *: 0630010*6*0140*6666601010
+Key *: 0630060*1*41660*7066166::
+
 
 
 ::Mickey,
 
 Here's your text:
+GbGbAED# BBAG#G# AEFBEA# D
+AG#A#BD#G# A#A#DEDb G#A#AGbC AGbEGA CGbG#
+GbG#D#G#A#B CED#D#G# AGbFGbA# BED#A#CE 
+A#G#FG#BC GbFCF BG#ADbG#F BCGbF
 
-FD#C FCAbCD#EBD D EFAbD#E
-C#D#EEBbAbFEBb B ECCF
-FD#C G D#D#EFD#Bb CC# CAFEBBbFECB
-D#CEFGCEE BEBC AbAbGCE BbAbC#D#EBbC
+::::
+Good luck, mate!
