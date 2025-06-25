@@ -22,10 +22,10 @@ std::map<int, QString> extractStringsWithPositions(const QString& text, QStringL
 
 std::vector< std::map<int, QString> > filteredTextWithPositions(const QString& encodedText)
 {
-	static QRegularExpression const backslashHPlus("\\h+");
+	static QRegularExpression const whitespaceCluster("\\h+");
 	static QChar const space(' ');
 	QString text = encodedText;
-	text.replace(backslashHPlus, space);
+	text.replace(whitespaceCluster, space);
 
 	std::map<int, QString> const textWithPositions = extractStringsWithPositions(
 	            text, AllSemitones + QStringList{space, "\n"});
