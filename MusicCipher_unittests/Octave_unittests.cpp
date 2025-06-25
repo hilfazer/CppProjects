@@ -46,4 +46,47 @@ BOOST_AUTO_TEST_CASE(
 	}
 }
 
+BOOST_AUTO_TEST_CASE(
+	TestGetSemitoneFromOctave)
+{
+	Octave o1{2, 0, 0};
+	BOOST_CHECK_EQUAL( o1.getSemitone(0).toStdString(), "C" );
+	BOOST_CHECK_EQUAL( o1.getSemitone(3).toStdString(), "D#" );
+
+	Octave o2{2, 11, 0};
+	BOOST_CHECK_EQUAL( o2.getSemitone(0).toStdString(), "B" );
+	BOOST_CHECK_EQUAL( o2.getSemitone(1).toStdString(), "C" );
+}
+
+BOOST_AUTO_TEST_CASE(
+	TestGetOctaveNumberTransposition0)
+{
+	Octave octave{4, 0, 1};
+	std::map<unsigned, unsigned> index2octaveNumber
+	{
+		{0, 4}, {1, 4}, {11, 4}, {8, 4},
+	};
+
+	for (auto const& idx2num : index2octaveNumber)
+	{
+		BOOST_CHECK_EQUAL(idx2num.second, octave.getOctaveNumber(idx2num.first));
+	}
+}
+
+BOOST_AUTO_TEST_CASE(
+	TestGetOctaveNumberTransposition11)
+{
+	Octave octave{1, 11, 1};
+	std::map<unsigned, unsigned> index2octaveNumber
+	{
+		{0, 1}, {1, 2}, {11, 2}, {8, 2},
+	};
+
+	for (auto const& idx2num : index2octaveNumber)
+	{
+		BOOST_CHECK_EQUAL(idx2num.second, octave.getOctaveNumber(idx2num.first));
+	}
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()
