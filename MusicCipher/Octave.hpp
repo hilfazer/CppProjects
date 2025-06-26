@@ -37,7 +37,7 @@ public:
 
 	char getSymbol(unsigned idx) const;
 
-	unsigned findSemitone(QString semitone) const;
+	unsigned findSemitone(QString standardSemitone) const;
 
 	static QString normalize(QString const& semitone);
 

@@ -33,10 +33,10 @@ char Octave::getSymbol(unsigned idx) const
 	return SymbolArrays[m_symbolsIndex][idx];
 }
 
-unsigned Octave::findSemitone(QString semitone) const
+unsigned Octave::findSemitone(QString standardSemitone) const
 {
-	assert( m_semitones.contains(semitone) );
-	return unsigned(m_semitones.indexOf(semitone));
+	assert( m_semitones.contains(standardSemitone) );
+	return unsigned(m_semitones.indexOf(standardSemitone));
 }
 
 QString Octave::normalize(const QString& semitone)
