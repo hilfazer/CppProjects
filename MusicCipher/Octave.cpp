@@ -42,10 +42,23 @@ unsigned Octave::findSemitone(QString semitone) const
 QString Octave::normalize(const QString& semitone)
 {
 	if ( !AllSemitones.contains(semitone) )
-		throw NotASemitoneException{};
+		throw NotASemitoneException{semitone};
 
 	if(FlattenedToSharpened.find(semitone) != FlattenedToSharpened.end())
 		return FlattenedToSharpened.at(semitone);
 	else
 		return semitone;
 }
+
+
+NotASemitoneException::NotASemitoneException(const QString &str)
+	: m_str(str.toStdString())
+{
+}
+
+const char *NotASemitoneException::what() const
+{
+	return m_str.c_str();
+}
+
+

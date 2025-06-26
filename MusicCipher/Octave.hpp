@@ -15,7 +15,12 @@ extern const char SymbolArrays[3][13];
 
 class NotASemitoneException : std::exception
 {
-	// TODO implement what()
+public:
+	NotASemitoneException(QString const& str);
+	const char *what() const;
+
+private:
+	std::string const m_str;
 };
 
 class Octave
