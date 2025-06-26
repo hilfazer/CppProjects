@@ -35,10 +35,8 @@ OctaveParsingResults parseOctaveKeys(QString const& keyText)
 			continue;
 
 		int firstNumberPosition = findOctaveNumbersPositionKeyPrefix(lineNoWs);
-		if (firstNumberPosition < 0)
-		{
-			firstNumberPosition = 0;
-		}
+
+		firstNumberPosition = std::max(firstNumberPosition, 0);
 
 		if (lineNoWs.length() <= TranspositionDigitsNumber)
 			continue;
