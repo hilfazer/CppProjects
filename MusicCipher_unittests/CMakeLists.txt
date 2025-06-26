@@ -8,12 +8,14 @@ set(CMAKE_AUTORCC ON)
 
 enable_testing()
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(MusicCipherUnitTests main.cpp
     ../MusicCipher/Octave.cpp
-    Octave_unittests.cpp)
+    Octave_unittests.cpp
+    OctaveKeysParser_unittests.cpp
+    ../MusicCipher/OctaveKeysParser.cpp)
 add_test(NAME MusicCipherUnitTests COMMAND MusicCipherUnitTests)
 
 if (DEFINED ENV{BOOST_INCLUDE_DIR})

@@ -12,6 +12,8 @@ struct OctaveParsingResults
 	int thirdOctaveNumber = -1;
 
 	QStringList textAsOctaveNumbers;
+
+	bool operator==(OctaveParsingResults const& other) const;
 };
 
 OctaveParsingResults parseOctaveKeys( QString const& keyText );

@@ -15,7 +15,9 @@ static unsigned const TranspositionDigitsNumber = 3;
 
 
 bool isNumbersLine(QString const& lineNoWs);
+
 int findOctaveNumbersPositionKeyPrefix(QString const& lineNoWs);
+
 OctaveParsingResults getOctaveParsingResults(QStringList const& lines);
 
 }
@@ -102,3 +104,16 @@ OctaveParsingResults getOctaveParsingResults(QStringList const& lines)
 }
 
 }
+
+#define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
+
+bool OctaveParsingResults::operator==(const OctaveParsingResults &other) const
+{
+	return
+		firstOctaveNumber == other.firstOctaveNumber &&
+		secondOctaveNumber == other.secondOctaveNumber &&
+		thirdOctaveNumber == other.thirdOctaveNumber &&
+		textAsOctaveNumbers == other.textAsOctaveNumbers;
+}
+
+#undef _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
