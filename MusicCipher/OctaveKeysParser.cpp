@@ -16,7 +16,6 @@ static unsigned const TranspositionDigitsNumber = 3;
 
 bool isNumbersLine(QString const& lineNoWs);
 int findOctaveNumbersPositionKeyPrefix(QString const& lineNoWs);
-int findOctaveNumbersPositionFallback(QString const& lineNoWs);
 OctaveParsingResults getOctaveParsingResults(QStringList const& lines);
 
 }
@@ -38,9 +37,7 @@ OctaveParsingResults parseOctaveKeys(QString const& keyText)
 		int firstNumberPosition = findOctaveNumbersPositionKeyPrefix(lineNoWs);
 		if (firstNumberPosition < 0)
 		{
-			firstNumberPosition = findOctaveNumbersPositionFallback(lineNoWs);
-			if (firstNumberPosition < 0)
-				continue;
+			firstNumberPosition = 0;
 		}
 
 		if (lineNoWs.length() <= TranspositionDigitsNumber)
@@ -79,11 +76,6 @@ int findOctaveNumbersPositionKeyPrefix(QString const& lineNoWs)
 		return -1;
 	else
 		return PositionForKeyPrefix;
-}
-
-int findOctaveNumbersPositionFallback(QString const&)
-{
-	return 0;
 }
 
 OctaveParsingResults getOctaveParsingResults(QStringList const& lines)
