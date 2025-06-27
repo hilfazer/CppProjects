@@ -50,7 +50,7 @@ StringError writePlanToFile(
 
 	xmlWriter.writeStartElement(ActionsGroupElement);
 	{
-		auto serializedActions = serializeHistoryActions(history);
+		auto const serializedActions = serializeHistoryActions(history);
 		for (SerializedHistoryAction const& serializedAction : serializedActions) {
 			writeAction(serializedAction, xmlWriter);
 		}
