@@ -4,12 +4,14 @@
 
 int main(int argc, char* argv[])
 {
+
+	QApplication a(argc, argv);
+
 	QFile styleSheetFile("resources/Combinear/Combinear.qss");
 	styleSheetFile.open(QFile::ReadOnly);
 	QString styleSheet = QLatin1String(styleSheetFile.readAll());
+	a.setStyleSheet(styleSheet);
 
-	QApplication a(argc, argv);
-	//	a.setStyleSheet(styleSheet);
 	MainWindow   w;
 	w.show();
 	return a.exec();
