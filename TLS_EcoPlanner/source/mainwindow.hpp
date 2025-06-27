@@ -33,8 +33,9 @@ private slots:
 	void onHistoryModified(History const* history);
 	void onPriceModifiersChanged(PriceModsFlags modifiers);
 
-	void on_actionToggle_Easy_Price_Modifier_toggled(bool arg1);
-	void on_actionToggle_Apo_Price_Modifier_toggled(bool arg1);
+	void setOmenOfDiscountPriceModifier(bool toggled);
+	void setApoPriceModifier(bool toggled);
+	// TODO apo price modifiers; there are 3 stages: 20, 40 and 60 %
 	void on_actionStartNewDay_triggered();
 	void on_actionBuild_Gold_Mine_triggered();
 	void on_buttonMineProd_pressed();

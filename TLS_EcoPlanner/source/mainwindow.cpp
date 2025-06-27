@@ -55,8 +55,8 @@ MainWindow::MainWindow(QWidget* parent) :
 	        &Controller::resetHistoryToIndex);
 	ui->tableViewHistory->setItemDelegateForColumn(HistoryModel::ColumnIdx::Reset, delegate);
 
-	m_controller->setPriceModifiers({ ui->actionToggle_Easy_Price_Modifier->isChecked(),
-	                                  ui->actionToggle_Apo_Price_Modifier->isChecked() });
+	m_controller->setPriceModifiers({ ui->actionToggleOmenOfDiscount->isChecked(),
+									  ui->actionToggleApoPriceModifier->isChecked() });
 
 	resetWithDataFile(DefaultSelectedDataFileName);
 }
@@ -90,12 +90,12 @@ void MainWindow::connectSignalsAndSlots()
 
 	connect(ui->actionLoadDataFile, &QAction::triggered, this, &MainWindow::selectGameDataFile);
 
-	connect(ui->actionWrite_History_To_File,
+	connect(ui->actionSavePlanToFile,
 	        &QAction::triggered,
 	        this,
 	        &MainWindow::writeHistoryToFile);
 
-	connect(ui->actionRead_History_From_File,
+	connect(ui->actionLoadPlanFromFile,
 	        &QAction::triggered,
 	        this,
 	        &MainWindow::readHistoryFromFile);
@@ -104,6 +104,16 @@ void MainWindow::connectSignalsAndSlots()
 	        &Controller::priceModifiersChanged,
 	        this,
 	        &MainWindow::onPriceModifiersChanged);
+
+	connect(ui->actionToggleOmenOfDiscount,
+			&QAction::toggled,
+			this,
+			&MainWindow::setOmenOfDiscountPriceModifier);
+
+	connect(ui->actionToggleApoPriceModifier,
+			&QAction::toggled,
+			this,
+			&MainWindow::setApoPriceModifier);
 }
 
 void MainWindow::updateGoldMineControls(std::size_t mineCount)
@@ -150,8 +160,18 @@ void MainWindow::onHistoryModified(History const* history)
 
 void MainWindow::onPriceModifiersChanged(PriceModsFlags modifiers)
 {
-	ui->actionToggle_Easy_Price_Modifier->setChecked(modifiers.easy);
-	ui->actionToggle_Apo_Price_Modifier->setChecked(modifiers.apoc);
+	ui->actionToggleOmenOfDiscount->setChecked(modifiers.easy);
+	ui->actionToggleApoPriceModifier->setChecked(modifiers.apoc);
+}
+
+void MainWindow::setOmenOfDiscountPriceModifier(bool toggled)
+{
+	m_controller->setPriceModifiers({ toggled, ui->actionToggleApoPriceModifier->isChecked() });
+}
+
+void MainWindow::setApoPriceModifier(bool toggled)
+{
+	m_controller->setPriceModifiers({ ui->actionToggleOmenOfDiscount->isChecked(), toggled });
 }
 
 void MainWindow::selectGameDataFile()
@@ -190,16 +210,6 @@ void MainWindow::readHistoryFromFile()
 	        this, OpenHistoryDialogTitle, HistoryDialogPath, HistoryDialogFilters);
 
 	m_controller->loadPlan(filename);
-}
-
-void MainWindow::on_actionToggle_Easy_Price_Modifier_toggled(bool arg1)
-{
-	m_controller->setPriceModifiers({ arg1, ui->actionToggle_Apo_Price_Modifier->isChecked() });
-}
-
-void MainWindow::on_actionToggle_Apo_Price_Modifier_toggled(bool arg1)
-{
-	m_controller->setPriceModifiers({ ui->actionToggle_Easy_Price_Modifier->isChecked(), arg1 });
 }
 
 void MainWindow::on_actionStartNewDay_triggered()
