@@ -114,21 +114,67 @@ void MainWindow::connectSignalsAndSlots()
 			&QAction::toggled,
 			this,
 			&MainWindow::setApoPriceModifier);
+
+	connect(ui->actionStartNewDay,
+			&QAction::triggered,
+			this,
+			&MainWindow::startNewDay);
+
+	connect(ui->actionBuildGoldMine,
+			&QAction::triggered,
+			this,
+			&MainWindow::buildGoldMine);
+
+	connect(ui->buttonUpgradeGoldMineProduction,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::upgradeGoldMineProduction);
+
+	connect(ui->buttonUpgradeGoldMineWorkers,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::upgradeGoldMineWorkers);
+
+	connect(ui->buttonUpgradeShop,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::upgradeShop);
+
+	connect(ui->actionBuildHouse,
+			&QAction::triggered,
+			this,
+			&MainWindow::buildHouse);
+
+	connect(ui->buttonUpgradeHouse,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::buildGoldMine);
+
+	connect(ui->pushButtonWorkGoldMine,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::workGoldMine);
+
+	connect(ui->actionGenerateDefaultGameDataFile,
+			&QAction::triggered,
+			this,
+			&MainWindow::generateDefaultGameDataFile);
+
 }
 
 void MainWindow::updateGoldMineControls(std::size_t mineCount)
 {
 	ui->spinBoxMineIndex->setMinimum(0);
 	ui->spinBoxMineIndex->setMaximum(static_cast<int>(mineCount) - 1);
-	ui->buttonMineProd->setDisabled(mineCount == 0);
-	ui->buttonMineWork->setDisabled(mineCount == 0);
+	ui->buttonUpgradeGoldMineProduction->setDisabled(mineCount == 0);
+	ui->buttonUpgradeGoldMineWorkers->setDisabled(mineCount == 0);
 }
 
 void MainWindow::updateHouseControls(std::size_t houseCount)
 {
 	ui->spinBoxHouseIdx->setMinimum(0);
 	ui->spinBoxHouseIdx->setMaximum(static_cast<int>(houseCount) - 1);
-	ui->pushButtonHouseUpgrade->setDisabled(houseCount == 0);
+	ui->buttonUpgradeHouse->setDisabled(houseCount == 0);
 }
 
 void MainWindow::updateWorkerCounts(unsigned remaining, unsigned max)
@@ -302,7 +348,7 @@ void MainWindow::upgradeHouse()
 	m_controller->upgradeHouse(ui->spinBoxHouseIdx->text().toUInt());
 }
 
-void MainWindow::workMine()
+void MainWindow::workGoldMine()
 {
 	m_controller->workMine(ui->spinBoxMineIndex->text().toUInt());
 }

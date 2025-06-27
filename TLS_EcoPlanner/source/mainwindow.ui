@@ -84,7 +84,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButtonHouseUpgrade">
+         <widget class="QPushButton" name="buttonUpgradeHouse">
           <property name="text">
            <string>Expansion</string>
           </property>
@@ -126,7 +126,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButtonWork">
+         <widget class="QPushButton" name="pushButtonWorkGoldMine">
           <property name="text">
            <string>Work</string>
           </property>
@@ -137,7 +137,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="buttonMineProd">
+         <widget class="QPushButton" name="buttonUpgradeGoldMineProduction">
           <property name="text">
            <string>Production</string>
           </property>
@@ -148,7 +148,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="buttonMineWork">
+         <widget class="QPushButton" name="buttonUpgradeGoldMineWorkers">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -427,7 +427,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionBuild_Gold_Mine"/>
+   <addaction name="actionBuildGoldMine"/>
    <addaction name="actionBuildHouse"/>
   </widget>
   <action name="actionToggleOmenOfDiscount">
@@ -477,7 +477,7 @@
     <string>Start New Day</string>
    </property>
   </action>
-  <action name="actionBuild_Gold_Mine">
+  <action name="actionBuildGoldMine">
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/mine/gold_mine_icon.jpg</normaloff>:/mine/gold_mine_icon.jpg</iconset>
