@@ -36,22 +36,22 @@ private slots:
 	void setOmenOfDiscountPriceModifier(bool toggled);
 	void setApoPriceModifier(bool toggled);
 	// TODO apo price modifiers; there are 3 stages: 20, 40 and 60 %
-	void on_actionStartNewDay_triggered();
-	void on_actionBuild_Gold_Mine_triggered();
-	void on_buttonMineProd_pressed();
-	void on_buttonMineWork_pressed();
+	void startNewDay();
+	void buildGoldMine();
+	void upgradeGoldMineProduction();
+	void upgradeGoldMineWorkers();
 	void on_comboBoxWealthyHaven_currentIndexChanged(int index);
-	void on_buttonUpgradeShop_pressed();
-	void on_actionGenerateDefaultGameDataFile_triggered();
-	void on_actionBuildHouse_triggered();
-	void on_pushButtonHouseUpgrade_pressed();
-	void on_pushButtonWork_pressed();
+	void upgradeShop();
+	void generateDefaultGameDataFile();
+	void buildHouse();
+	void upgradeHouse();
+	void workMine();
 
 	void handleMessage(Message msg);
 
-	void on_buttonBuildShop_pressed();
+	void buildShop();
 
-	void on_buttonScavengeRuins_pressed();
+	void scavengeRuins();
 
 private:
 	void selectGameDataFile();

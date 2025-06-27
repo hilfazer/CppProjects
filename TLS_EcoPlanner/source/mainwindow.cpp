@@ -212,30 +212,30 @@ void MainWindow::readHistoryFromFile()
 	m_controller->loadPlan(filename);
 }
 
-void MainWindow::on_actionStartNewDay_triggered()
+void MainWindow::startNewDay()
 {
 	m_controller->startNewDay();
 }
 
-void MainWindow::on_buttonMineProd_pressed()
+void MainWindow::upgradeGoldMineProduction()
 {
 	int mineIdx = ui->spinBoxMineIndex->value();
 	m_controller->upgradeGoldMineProduction(static_cast<Stage::BuildingIndex>(mineIdx));
 }
 
-void MainWindow::on_buttonMineWork_pressed()
+void MainWindow::upgradeGoldMineWorkers()
 {
 	int mineIdx = ui->spinBoxMineIndex->value();
 	m_controller->upgradeGoldMineWorkers(static_cast<Stage::BuildingIndex>(mineIdx));
 }
 
-void MainWindow::on_actionBuild_Gold_Mine_triggered()
+void MainWindow::buildGoldMine()
 {
 	assert(m_controller != nullptr);
 	m_controller->buildGoldMine();
 }
 
-void MainWindow::on_actionBuildHouse_triggered()
+void MainWindow::buildHouse()
 {
 	assert(m_controller != nullptr);
 	m_controller->buildHouse();
@@ -256,12 +256,12 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
 	}
 }
 
-void MainWindow::on_buttonUpgradeShop_pressed()
+void MainWindow::upgradeShop()
 {
 	m_controller->upgradeShopSellingPrices();
 }
 
-void MainWindow::on_actionGenerateDefaultGameDataFile_triggered()
+void MainWindow::generateDefaultGameDataFile()
 {
 	QFileInfo fileInfo(DefaultDataFileName);
 	assert(fileInfo.filePath().isEmpty() == false);
@@ -297,22 +297,22 @@ void MainWindow::addMessageToMessageLog(Message msg)
 	ui->textEditMessageLog->append(text);
 }
 
-void MainWindow::on_pushButtonHouseUpgrade_pressed()
+void MainWindow::upgradeHouse()
 {
 	m_controller->upgradeHouse(ui->spinBoxHouseIdx->text().toUInt());
 }
 
-void MainWindow::on_pushButtonWork_pressed()
+void MainWindow::workMine()
 {
 	m_controller->workMine(ui->spinBoxMineIndex->text().toUInt());
 }
 
-void MainWindow::on_buttonBuildShop_pressed()
+void MainWindow::buildShop()
 {
 	m_controller->buildShop();
 }
 
-void MainWindow::on_buttonScavengeRuins_pressed()
+void MainWindow::scavengeRuins()
 {
 	m_controller->scavengeRuins(ui->spinBoxRuinsSize->text().toUInt());
 }
