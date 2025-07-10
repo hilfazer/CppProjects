@@ -17,10 +17,12 @@ DayStartAction::DayStartAction(
         HistoryActionBase(stage), m_dayNumber(dayNumber), m_panicRank(rank)
 {
 	assert(dayNumber > 0);
-	assert(dayNumber - 1 < gameData.night.panicRewards.size());
 
-	m_nightItemValue  = gameData.night.itemValues.at(dayNumber - 1);
-	m_panicGoldReward = gameData.night.panicRewards[dayNumber - 1].at(rank);
+	unsigned const DayIndex = dayNumber - 1;
+	assert(DayIndex < gameData.night.panicRewards.size());
+
+	m_nightItemValue  = gameData.night.itemValues.at(DayIndex);
+	m_panicGoldReward = gameData.night.panicRewards[DayIndex].at(rank);
 }
 
 StageError DayStartAction::doImpl()

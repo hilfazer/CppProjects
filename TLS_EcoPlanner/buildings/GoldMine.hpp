@@ -4,7 +4,6 @@
 
 #include <QString>
 
-#include <map>
 #include <vector>
 
 class GoldMine

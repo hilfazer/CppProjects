@@ -1,6 +1,5 @@
 #include "GoldMine.hpp"
 
-#include <memory>
 
 namespace
 {
