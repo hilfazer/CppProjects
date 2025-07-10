@@ -40,7 +40,6 @@ private slots:
 	void buildGoldMine();
 	void upgradeGoldMineProduction();
 	void upgradeGoldMineWorkers();
-	void on_comboBoxWealthyHaven_currentIndexChanged(int index);
 	void upgradeShop();
 	void buildHouse();
 	void upgradeHouse();

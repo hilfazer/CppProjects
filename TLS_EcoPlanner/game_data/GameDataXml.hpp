@@ -16,9 +16,6 @@ const struct {
 		QString ruins = "RuinsData";
 	} Data;
 
-	QString wealthyHaven1 = "WealthyHaven1";
-	QString wealthyHaven2 = "WealthyHaven2";
-
 	struct {
 		QString mine    = "MinePriceData";
 		QString house   = "HousePriceData";

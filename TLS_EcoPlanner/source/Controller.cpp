@@ -169,21 +169,6 @@ void Controller::startNewDay()
 	emitMessage(MsgNewDayStarted, Message::Severity::INFO);
 }
 
-void Controller::setWealthyHavenLevel(unsigned level)
-{
-	if (checkIfDataExists() != 0)
-		return;
-
-	assert(m_gameData && m_history);
-
-	unsigned startingGold = (level >= 1) * m_gameData->wealthyHaven1Bonus +
-	                        (level >= 2) * m_gameData->wealthyHaven2Bonus;
-	m_history->setStartingGold(static_cast<int>(startingGold));
-
-	m_historyModel->update();
-	emit historyModified(m_history.get());
-}
-
 bool Controller::resetWithGameDataFile(QString const& dataFilename)
 {
 	QString  error;

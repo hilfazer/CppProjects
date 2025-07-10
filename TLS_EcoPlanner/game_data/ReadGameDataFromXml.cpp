@@ -76,12 +76,6 @@ GameData readGameDataFromXml(QString const& filename, QString& error)
 			else if (xmlReader.qualifiedName() == Elements.Price.apocMod) {
 				gameData.prices.apocDifficultyModifier = xmlReader.readElementText().toFloat();
 			}
-			else if (xmlReader.qualifiedName() == Elements.wealthyHaven1) {
-				gameData.wealthyHaven1Bonus = xmlReader.readElementText().toUInt();
-			}
-			else if (xmlReader.qualifiedName() == Elements.wealthyHaven2) {
-				gameData.wealthyHaven2Bonus = xmlReader.readElementText().toUInt();
-			}
 			else if (xmlReader.qualifiedName() == Elements.Data.mine) {
 				gameData.goldMineUpgrades = readGoldMineData(xmlReader);
 			}

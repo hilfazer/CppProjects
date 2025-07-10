@@ -30,7 +30,6 @@ public:
 	void loadPlan(QString const& filename);
 
 	void setPriceModifiers(PriceModsFlags modifiers);
-	void setWealthyHavenLevel(unsigned level);
 	void startNewDay();
 
 	void buildGoldMine();

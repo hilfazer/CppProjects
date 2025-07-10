@@ -2,8 +2,6 @@
   <xs:element name="GameData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element type="xs:int" name="WealthyHaven1"/>
-        <xs:element type="xs:int" name="WealthyHaven2"/>
 
         <xs:element name="PriceData">
           <xs:complexType>

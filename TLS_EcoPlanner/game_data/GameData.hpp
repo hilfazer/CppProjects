@@ -74,9 +74,6 @@ struct NightRewardData {
 };
 
 struct GameData {
-	unsigned wealthyHaven1Bonus = 25;
-	unsigned wealthyHaven2Bonus = 25;
-
 	PriceData             prices;
 	MaxBuildingsData      maxBuildings;
 	NightRewardData       night;

@@ -286,11 +286,6 @@ void MainWindow::buildHouse()
 	m_controller->buildHouse();
 }
 
-void MainWindow::on_comboBoxWealthyHaven_currentIndexChanged(int index)
-{
-	m_controller->setWealthyHavenLevel(static_cast<unsigned>(index));
-}
-
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key::Key_Escape) {

@@ -12,7 +12,8 @@ namespace GameDataXml
 namespace
 {
 
-void writeDirectGameData(GameData const& data, QXmlStreamWriter& xmlWriter);
+// TODO: write omens
+
 void writeHousePriceData(HousePriceData const& data, QXmlStreamWriter& xmlWriter);
 void writeMinePriceData(MinePriceData const& data, QXmlStreamWriter& xmlWriter);
 void writeShopPriceData(ShopPriceData const& data, QXmlStreamWriter& xmlWriter);
@@ -40,7 +41,7 @@ StringError writeGameDataToXml(GameData const& data, QString const& fileName)
 	{
 		xmlWriter.writeStartElement(Elements.Data.game);
 		{
-			writeDirectGameData(data, xmlWriter);
+			// TODO write omens
 
 			xmlWriter.writeStartElement(Elements.Data.price);
 			{
@@ -73,12 +74,6 @@ StringError writeGameDataToXml(GameData const& data, QString const& fileName)
 
 namespace
 {
-
-void writeDirectGameData(GameData const& data, QXmlStreamWriter& xmlWriter)
-{
-	xmlWriter.writeTextElement(Elements.wealthyHaven1, QString::number(data.wealthyHaven1Bonus));
-	xmlWriter.writeTextElement(Elements.wealthyHaven2, QString::number(data.wealthyHaven2Bonus));
-}
 
 void writeHousePriceData(HousePriceData const& data, QXmlStreamWriter& xmlWriter)
 {
