@@ -55,8 +55,8 @@ MainWindow::MainWindow(QWidget* parent) :
 	        &Controller::resetHistoryToIndex);
 	ui->tableViewHistory->setItemDelegateForColumn(HistoryModel::ColumnIdx::Reset, delegate);
 
-	m_controller->setPriceModifiers({ ui->actionToggle_Easy_Price_Modifier->isChecked(),
-	                                  ui->actionToggle_Apo_Price_Modifier->isChecked() });
+	m_controller->setPriceModifiers({ ui->actionToggleOmenOfDiscount->isChecked(),
+									  ui->actionToggleApoPriceModifier->isChecked() });
 
 	resetWithDataFile(DefaultSelectedDataFileName);
 }
@@ -90,12 +90,12 @@ void MainWindow::connectSignalsAndSlots()
 
 	connect(ui->actionLoadDataFile, &QAction::triggered, this, &MainWindow::selectGameDataFile);
 
-	connect(ui->actionWrite_History_To_File,
+	connect(ui->actionSavePlanToFile,
 	        &QAction::triggered,
 	        this,
 	        &MainWindow::writeHistoryToFile);
 
-	connect(ui->actionRead_History_From_File,
+	connect(ui->actionLoadPlanFromFile,
 	        &QAction::triggered,
 	        this,
 	        &MainWindow::readHistoryFromFile);
@@ -104,21 +104,77 @@ void MainWindow::connectSignalsAndSlots()
 	        &Controller::priceModifiersChanged,
 	        this,
 	        &MainWindow::onPriceModifiersChanged);
+
+	connect(ui->actionToggleOmenOfDiscount,
+			&QAction::toggled,
+			this,
+			&MainWindow::setOmenOfDiscountPriceModifier);
+
+	connect(ui->actionToggleApoPriceModifier,
+			&QAction::toggled,
+			this,
+			&MainWindow::setApoPriceModifier);
+
+	connect(ui->actionStartNewDay,
+			&QAction::triggered,
+			this,
+			&MainWindow::startNewDay);
+
+	connect(ui->actionBuildGoldMine,
+			&QAction::triggered,
+			this,
+			&MainWindow::buildGoldMine);
+
+	connect(ui->buttonUpgradeGoldMineProduction,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::upgradeGoldMineProduction);
+
+	connect(ui->buttonUpgradeGoldMineWorkers,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::upgradeGoldMineWorkers);
+
+	connect(ui->buttonUpgradeShop,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::upgradeShop);
+
+	connect(ui->actionBuildHouse,
+			&QAction::triggered,
+			this,
+			&MainWindow::buildHouse);
+
+	connect(ui->buttonUpgradeHouse,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::buildGoldMine);
+
+	connect(ui->pushButtonWorkGoldMine,
+			&QPushButton::pressed,
+			this,
+			&MainWindow::workGoldMine);
+
+	connect(ui->actionGenerateDefaultGameDataFile,
+			&QAction::triggered,
+			this,
+			&MainWindow::generateDefaultGameDataFile);
+
 }
 
 void MainWindow::updateGoldMineControls(std::size_t mineCount)
 {
 	ui->spinBoxMineIndex->setMinimum(0);
 	ui->spinBoxMineIndex->setMaximum(static_cast<int>(mineCount) - 1);
-	ui->buttonMineProd->setDisabled(mineCount == 0);
-	ui->buttonMineWork->setDisabled(mineCount == 0);
+	ui->buttonUpgradeGoldMineProduction->setDisabled(mineCount == 0);
+	ui->buttonUpgradeGoldMineWorkers->setDisabled(mineCount == 0);
 }
 
 void MainWindow::updateHouseControls(std::size_t houseCount)
 {
 	ui->spinBoxHouseIdx->setMinimum(0);
 	ui->spinBoxHouseIdx->setMaximum(static_cast<int>(houseCount) - 1);
-	ui->pushButtonHouseUpgrade->setDisabled(houseCount == 0);
+	ui->buttonUpgradeHouse->setDisabled(houseCount == 0);
 }
 
 void MainWindow::updateWorkerCounts(unsigned remaining, unsigned max)
@@ -150,8 +206,18 @@ void MainWindow::onHistoryModified(History const* history)
 
 void MainWindow::onPriceModifiersChanged(PriceModsFlags modifiers)
 {
-	ui->actionToggle_Easy_Price_Modifier->setChecked(modifiers.easy);
-	ui->actionToggle_Apo_Price_Modifier->setChecked(modifiers.apoc);
+	ui->actionToggleOmenOfDiscount->setChecked(modifiers.easy);
+	ui->actionToggleApoPriceModifier->setChecked(modifiers.apoc);
+}
+
+void MainWindow::setOmenOfDiscountPriceModifier(bool toggled)
+{
+	m_controller->setPriceModifiers({ toggled, ui->actionToggleApoPriceModifier->isChecked() });
+}
+
+void MainWindow::setApoPriceModifier(bool toggled)
+{
+	m_controller->setPriceModifiers({ ui->actionToggleOmenOfDiscount->isChecked(), toggled });
 }
 
 void MainWindow::selectGameDataFile()
@@ -192,40 +258,30 @@ void MainWindow::readHistoryFromFile()
 	m_controller->loadPlan(filename);
 }
 
-void MainWindow::on_actionToggle_Easy_Price_Modifier_toggled(bool arg1)
-{
-	m_controller->setPriceModifiers({ arg1, ui->actionToggle_Apo_Price_Modifier->isChecked() });
-}
-
-void MainWindow::on_actionToggle_Apo_Price_Modifier_toggled(bool arg1)
-{
-	m_controller->setPriceModifiers({ ui->actionToggle_Easy_Price_Modifier->isChecked(), arg1 });
-}
-
-void MainWindow::on_actionStartNewDay_triggered()
+void MainWindow::startNewDay()
 {
 	m_controller->startNewDay();
 }
 
-void MainWindow::on_buttonMineProd_pressed()
+void MainWindow::upgradeGoldMineProduction()
 {
 	int mineIdx = ui->spinBoxMineIndex->value();
 	m_controller->upgradeGoldMineProduction(static_cast<Stage::BuildingIndex>(mineIdx));
 }
 
-void MainWindow::on_buttonMineWork_pressed()
+void MainWindow::upgradeGoldMineWorkers()
 {
 	int mineIdx = ui->spinBoxMineIndex->value();
 	m_controller->upgradeGoldMineWorkers(static_cast<Stage::BuildingIndex>(mineIdx));
 }
 
-void MainWindow::on_actionBuild_Gold_Mine_triggered()
+void MainWindow::buildGoldMine()
 {
 	assert(m_controller != nullptr);
 	m_controller->buildGoldMine();
 }
 
-void MainWindow::on_actionBuildHouse_triggered()
+void MainWindow::buildHouse()
 {
 	assert(m_controller != nullptr);
 	m_controller->buildHouse();
@@ -246,12 +302,12 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
 	}
 }
 
-void MainWindow::on_buttonUpgradeShop_pressed()
+void MainWindow::upgradeShop()
 {
 	m_controller->upgradeShopSellingPrices();
 }
 
-void MainWindow::on_actionGenerateDefaultGameDataFile_triggered()
+void MainWindow::generateDefaultGameDataFile()
 {
 	QFileInfo fileInfo(DefaultDataFileName);
 	assert(fileInfo.filePath().isEmpty() == false);
@@ -287,22 +343,22 @@ void MainWindow::addMessageToMessageLog(Message msg)
 	ui->textEditMessageLog->append(text);
 }
 
-void MainWindow::on_pushButtonHouseUpgrade_pressed()
+void MainWindow::upgradeHouse()
 {
 	m_controller->upgradeHouse(ui->spinBoxHouseIdx->text().toUInt());
 }
 
-void MainWindow::on_pushButtonWork_pressed()
+void MainWindow::workGoldMine()
 {
 	m_controller->workMine(ui->spinBoxMineIndex->text().toUInt());
 }
 
-void MainWindow::on_buttonBuildShop_pressed()
+void MainWindow::buildShop()
 {
 	m_controller->buildShop();
 }
 
-void MainWindow::on_buttonScavengeRuins_pressed()
+void MainWindow::scavengeRuins()
 {
 	m_controller->scavengeRuins(ui->spinBoxRuinsSize->text().toUInt());
 }

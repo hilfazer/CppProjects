@@ -84,7 +84,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButtonHouseUpgrade">
+         <widget class="QPushButton" name="buttonUpgradeHouse">
           <property name="text">
            <string>Expansion</string>
           </property>
@@ -126,7 +126,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButtonWork">
+         <widget class="QPushButton" name="pushButtonWorkGoldMine">
           <property name="text">
            <string>Work</string>
           </property>
@@ -137,7 +137,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="buttonMineProd">
+         <widget class="QPushButton" name="buttonUpgradeGoldMineProduction">
           <property name="text">
            <string>Production</string>
           </property>
@@ -148,7 +148,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="buttonMineWork">
+         <widget class="QPushButton" name="buttonUpgradeGoldMineWorkers">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -388,7 +388,7 @@
      <x>0</x>
      <y>0</y>
      <width>1201</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -397,8 +397,8 @@
     </property>
     <addaction name="actionLoadDataFile"/>
     <addaction name="actionGenerateDefaultGameDataFile"/>
-    <addaction name="actionWrite_History_To_File"/>
-    <addaction name="actionRead_History_From_File"/>
+    <addaction name="actionSavePlanToFile"/>
+    <addaction name="actionLoadPlanFromFile"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -413,8 +413,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionToggle_Easy_Price_Modifier"/>
-   <addaction name="actionToggle_Apo_Price_Modifier"/>
+   <addaction name="actionToggleOmenOfDiscount"/>
+   <addaction name="actionToggleApoPriceModifier"/>
    <addaction name="actionStartNewDay"/>
   </widget>
   <widget class="QToolBar" name="toolBarBuildings">
@@ -427,10 +427,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionBuild_Gold_Mine"/>
+   <addaction name="actionBuildGoldMine"/>
    <addaction name="actionBuildHouse"/>
   </widget>
-  <action name="actionToggle_Easy_Price_Modifier">
+  <action name="actionToggleOmenOfDiscount">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -439,13 +439,13 @@
      <normaloff>:/difficulty/easy_icon.jpg</normaloff>:/difficulty/easy_icon.jpg</iconset>
    </property>
    <property name="text">
-    <string>Easy Price Modifier</string>
+    <string>Omen of Discount</string>
    </property>
    <property name="toolTip">
-    <string>Easy mode price modifier</string>
+    <string>Omen of Discount price modifier</string>
    </property>
   </action>
-  <action name="actionToggle_Apo_Price_Modifier">
+  <action name="actionToggleApoPriceModifier">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -458,6 +458,9 @@
    </property>
    <property name="text">
     <string>Apo Price Modifier</string>
+   </property>
+   <property name="toolTip">
+    <string>Apocalypse price modifier</string>
    </property>
   </action>
   <action name="actionLoadDataFile">
@@ -474,7 +477,7 @@
     <string>Start New Day</string>
    </property>
   </action>
-  <action name="actionBuild_Gold_Mine">
+  <action name="actionBuildGoldMine">
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/mine/gold_mine_icon.jpg</normaloff>:/mine/gold_mine_icon.jpg</iconset>
@@ -483,12 +486,12 @@
     <string>Build Gold Mine</string>
    </property>
   </action>
-  <action name="actionWrite_History_To_File">
+  <action name="actionSavePlanToFile">
    <property name="text">
     <string>Save Plan To File</string>
    </property>
   </action>
-  <action name="actionRead_History_From_File">
+  <action name="actionLoadPlanFromFile">
    <property name="text">
     <string>Load Plan From File</string>
    </property>

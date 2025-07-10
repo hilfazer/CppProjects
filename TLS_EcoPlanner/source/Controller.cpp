@@ -3,12 +3,10 @@
 #include "history/HistoryModel.hpp"
 #include "history/HistorySerialization.hpp"
 #include "history/action/DayStartAction.hpp"
-#include "history/action/HistoryAction.hpp"
 #include "history/action/HouseActions.hpp"
 #include "history/action/MineActions.hpp"
 #include "history/action/RuinsActions.hpp"
 #include "history/action/ShopActions.hpp"
-#include "source/FileOperations.hpp"
 #include "stage/Stage.hpp"
 #include "stage/StageModel.hpp"
 
