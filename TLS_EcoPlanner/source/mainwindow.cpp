@@ -6,7 +6,6 @@
 #include "history/History.hpp"
 #include "history/HistoryModel.hpp"
 #include "history/HistoryResetColumnDelegate.hpp"
-#include "stage/StageModel.hpp"
 
 #include <QFileDialog>
 #include <QKeyEvent>
@@ -73,9 +72,9 @@ void MainWindow::connectSignalsAndSlots()
 	connect(m_controller.get(), &Controller::message, this, &MainWindow::handleMessage);
 
 	connect(m_controller.get(),
-	        &Controller::stageModelChanged,
-	        ui->listViewStage,
-	        &QListView::setModel);
+			&Controller::stageModelChanged,
+			ui->listViewStage,
+			&QListView::setModel);
 
 	connect(m_controller.get(),
 	        &Controller::historyModelChanged,

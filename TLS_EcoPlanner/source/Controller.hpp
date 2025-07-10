@@ -50,7 +50,7 @@ public:
 
 signals:
 	void message(Message msg) const;
-	void stageModelChanged(StageModel* model);
+	void stageModelChanged(QAbstractItemModel* model);
 	void historyModelChanged(HistoryModel* model);
 	void stageModified(Stage const* stage);
 	void historyModified(History const* history);
