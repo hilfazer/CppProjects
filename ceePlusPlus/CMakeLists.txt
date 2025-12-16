@@ -5,8 +5,7 @@ project(ceePlusPlus LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(ceePlusPlus main.cpp
-    noisy_type.hpp shared_ptr.cpp)
+add_executable(ceePlusPlus main.cpp)
 
 include(GNUInstallDirs)
 install(TARGETS ceePlusPlus
