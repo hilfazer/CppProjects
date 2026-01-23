@@ -6,5 +6,6 @@
 CMakeLists.txt.user
 
 _builds
+*-build-*
 .qtc_clangd
 
