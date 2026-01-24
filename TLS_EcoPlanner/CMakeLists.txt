@@ -42,6 +42,10 @@ else()
             source/mainwindow.cpp  source/mainwindow.hpp source/mainwindow.ui
             source/Message.hpp source/Misc.hpp
             source/Controller.cpp source/Controller.hpp source/FileOperations.cpp source/FileOperations.hpp source/mainwindow.cpp source/mainwindow.hpp source/mainwindow.ui source/Message.hpp source/Misc.hpp
+            history/History.cpp history/History.hpp history/HistoryModel.cpp history/HistoryModel.hpp history/HistoryResetColumnDelegate.cpp history/HistoryResetColumnDelegate.hpp history/HistorySerialization.cpp history/HistorySerialization.hpp
+            history/action/DayStartAction.cpp history/action/DayStartAction.hpp history/action/HistoryAction.cpp history/action/HistoryAction.hpp history/action/HouseActions.cpp history/action/HouseActions.hpp history/action/MineActions.cpp history/action/MineActions.hpp history/action/RuinsActions.cpp history/action/RuinsActions.hpp history/action/ShopActions.cpp history/action/ShopActions.hpp
+            stage/Stage.cpp stage/Stage.hpp stage/StageModel.cpp stage/StageModel.hpp
+            buildings/GoldMine.cpp buildings/GoldMine.hpp buildings/House.cpp buildings/House.hpp buildings/Ruins.cpp buildings/Ruins.hpp buildings/Shop.cpp buildings/Shop.hpp
         )
     endif()
 endif()
