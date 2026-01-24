@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(TLS_EcoPlanner VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -14,9 +15,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+
+
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -38,6 +39,9 @@ else()
     else()
         add_executable(TLS_EcoPlanner
             ${PROJECT_SOURCES}
+            source/mainwindow.cpp  source/mainwindow.hpp source/mainwindow.ui
+            source/Message.hpp source/Misc.hpp
+            source/Controller.cpp source/Controller.hpp source/FileOperations.cpp source/FileOperations.hpp source/mainwindow.cpp source/mainwindow.hpp source/mainwindow.ui source/Message.hpp source/Misc.hpp
         )
     endif()
 endif()

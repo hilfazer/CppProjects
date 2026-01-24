@@ -1,12 +1,20 @@
-#include "mainwindow.h"
+#include "source/mainwindow.hpp"
 
-#include <QApplication>
+#include <QtWidgets/QApplication>
 
-int main(
-	int argc, char *argv[])
+#include <QFile>
+
+int main(int argc, char* argv[])
 {
+
 	QApplication a(argc, argv);
-	MainWindow w;
+
+	QFile styleSheetFile("resources/Combinear/Combinear.qss");
+	styleSheetFile.open(QFile::ReadOnly);
+	QString styleSheet = QLatin1String(styleSheetFile.readAll());
+	a.setStyleSheet(styleSheet);
+
+	MainWindow   w;
 	w.show();
 	return a.exec();
 }
