@@ -146,22 +146,6 @@ void MainWindow::setOctave(const Octave* octave, QTableWidget* octaveTable, cons
 	}
 }
 
-void MainWindow::setDefaultOctave(QTableWidget* octaveTable, const char symbols[])
-{
-
-	assert(octaveTable);
-	octaveTable->clearContents();
-
-	for (unsigned i = 0; i < 12; ++i)
-	{
-		QString symbol(symbols[i]);
-		octaveTable->setCellWidget( SymbolsRow, int(i), new QLineEdit( symbol ) );
-
-		octaveTable->setCellWidget(
-			SemitonesRow, int(i), new QLineEdit( StandardOctave[int(i)] ) );
-	}
-}
-
 void MainWindow::updateDecodeButton()
 {
 	ui->decodeButton->setEnabled(

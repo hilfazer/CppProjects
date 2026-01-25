@@ -39,7 +39,6 @@ private slots:
 private:
 	void setNumber( int number, QLineEdit* lineEdit);
 	void setOctave(Octave const* octave, QTableWidget* octaveTable, const char symbols[]);
-	void setDefaultOctave(QTableWidget* octaveTable, const char symbols[]);
 
 private:
 	Ui::MainWindow *ui;

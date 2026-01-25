@@ -1,7 +1,6 @@
 #include "IntervalKeyParser.hpp"
 
 #include <map>
-#include <string>
 
 namespace
 {
