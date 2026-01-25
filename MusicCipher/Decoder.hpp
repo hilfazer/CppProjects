@@ -1,12 +1,13 @@
 #ifndef DECODEDTEXTPARSER_H
 #define DECODEDTEXTPARSER_H
 
+#include <QStringList>
+
 #include <vector>
 #include <map>
 
 
 class QString;
-class QStringList;
 class Octave;
 
 QString decodeText(

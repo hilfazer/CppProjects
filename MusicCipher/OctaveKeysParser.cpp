@@ -1,6 +1,7 @@
 #include "OctaveKeysParser.hpp"
 
 #include <QStringList>
+#include <QRegularExpression>
 
 #include <vector>
 
@@ -30,7 +31,7 @@ OctaveParsingResults parseOctaveKeys(QString const& keyText)
 
 	while (!lines.empty())
 	{
-		auto lineNoWs = lines.first().remove(QRegExp("\\s+"));
+		auto lineNoWs = lines.first().remove(QRegularExpression("\\s+"));
 		lines.removeFirst();
 
 		if(lineNoWs.size() <= KeyStart.size() || !isNumbersLine(lineNoWs))
