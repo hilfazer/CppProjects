@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.5)
 
-project(TLS_EcoPlanner VERSION 0.1 LANGUAGES CXX)
+project(TLS_EcoPlanner LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -10,69 +11,56 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-
-set(PROJECT_SOURCES
+add_executable(TLS_EcoPlanner
+        PCH.hpp
         main.cpp
+        source/Misc.hpp
+        source/mainwindow.hpp source/mainwindow.cpp
+        source/mainwindow.ui
+        source/Controller.hpp source/Controller.cpp
+        source/FileOperations.hpp source/FileOperations.cpp
+        source/Message.hpp
 
+        stage/Stage.hpp stage/Stage.cpp
+        stage/StageModel.hpp stage/StageModel.cpp
 
+        history/History.hpp history/History.cpp
+        history/HistoryModel.hpp history/HistoryModel.cpp
+        history/HistoryResetColumnDelegate.hpp history/HistoryResetColumnDelegate.cpp
+        history/HistorySerialization.hpp history/HistorySerialization.cpp
 
+        history/action/HistoryAction.hpp history/action/HistoryAction.cpp
+        history/action/MineActions.hpp history/action/MineActions.cpp
+        history/action/HouseActions.hpp history/action/HouseActions.cpp
+        history/action/ShopActions.hpp history/action/ShopActions.cpp
+        history/action/DayStartAction.hpp history/action/DayStartAction.cpp
+        history/action/RuinsActions.hpp history/action/RuinsActions.cpp
+
+        game_data/GameData.hpp game_data/GameData.cpp
+        game_data/WriteGameDataToXml.cpp
+        game_data/ReadGameDataFromXml.cpp
+        game_data/GameDataXml.hpp
+
+        buildings/GoldMine.hpp buildings/GoldMine.cpp
+        buildings/Shop.hpp buildings/Shop.cpp
+        buildings/House.hpp buildings/House.cpp
+        buildings/Ruins.hpp buildings/Ruins.cpp
+
+        resources/icons.qrc
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(TLS_EcoPlanner
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET TLS_EcoPlanner APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(TLS_EcoPlanner SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(TLS_EcoPlanner
-            ${PROJECT_SOURCES}
-            source/mainwindow.cpp  source/mainwindow.hpp source/mainwindow.ui
-            source/Message.hpp source/Misc.hpp
-            source/Controller.cpp source/Controller.hpp source/FileOperations.cpp source/FileOperations.hpp source/mainwindow.cpp source/mainwindow.hpp source/mainwindow.ui source/Message.hpp source/Misc.hpp
-            history/History.cpp history/History.hpp history/HistoryModel.cpp history/HistoryModel.hpp history/HistoryResetColumnDelegate.cpp history/HistoryResetColumnDelegate.hpp history/HistorySerialization.cpp history/HistorySerialization.hpp
-            history/action/DayStartAction.cpp history/action/DayStartAction.hpp history/action/HistoryAction.cpp history/action/HistoryAction.hpp history/action/HouseActions.cpp history/action/HouseActions.hpp history/action/MineActions.cpp history/action/MineActions.hpp history/action/RuinsActions.cpp history/action/RuinsActions.hpp history/action/ShopActions.cpp history/action/ShopActions.hpp
-            stage/Stage.cpp stage/Stage.hpp stage/StageModel.cpp stage/StageModel.hpp
-            buildings/GoldMine.cpp buildings/GoldMine.hpp buildings/House.cpp buildings/House.hpp buildings/Ruins.cpp buildings/Ruins.hpp buildings/Shop.cpp buildings/Shop.hpp
-        )
-    endif()
-endif()
+target_precompile_headers(TLS_EcoPlanner PRIVATE PCH.hpp)
 
-target_link_libraries(TLS_EcoPlanner PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+include_directories("F:/Libraries/boost_1_86_0")
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.TLS_EcoPlanner)
-endif()
-set_target_properties(TLS_EcoPlanner PROPERTIES
-    ${BUNDLE_ID_OPTION}
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
+find_package(Qt5 REQUIRED COMPONENTS Widgets )
+find_package(Qt5 REQUIRED COMPONENTS XmlPatterns )
 
-include(GNUInstallDirs)
-install(TARGETS TLS_EcoPlanner
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+add_link_options("-fuse-ld=bfd")
+target_link_libraries(TLS_EcoPlanner PRIVATE Qt5::Widgets)
+target_link_libraries(TLS_EcoPlanner PRIVATE Qt5::XmlPatterns)
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(TLS_EcoPlanner)
-endif()
+configure_file(game_data.xsd game_data.xsd)
+configure_file(plan_schema.xsd plan_schema.xsd)
+configure_file(resources/Combinear/Combinear.qss resources/Combinear/Combinear.qss)
+configure_file(resources/Combinear/License.txt resources/Combinear/License.txt)
