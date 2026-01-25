@@ -31,13 +31,15 @@ OctaveParsingResults parseOctaveKeys(QString const& keyText)
 
 	while (!lines.empty())
 	{
-		auto lineNoWs = lines.first().remove(QRegularExpression("\\s+"));
+		static auto const whitespace = QRegularExpression("\\s+");
+		auto lineNoWs = lines.first().remove(whitespace);
 		lines.removeFirst();
 
-		if(lineNoWs.size() <= KeyStart.size() || !isNumbersLine(lineNoWs))
+		if (lineNoWs.size() <= KeyStart.size() || !isNumbersLine(lineNoWs))
 			continue;
 
-		int firstNumberPosition = findOctaveNumbersPositionKeyPrefix(lineNoWs);
+		int firstNumberPosition =
+			findOctaveNumbersPositionKeyPrefix(lineNoWs);
 
 		firstNumberPosition = std::max(firstNumberPosition, 0);
 
