@@ -56,7 +56,7 @@ NotASemitoneException::NotASemitoneException(const QString &str)
 {
 }
 
-const char *NotASemitoneException::what() const
+const char *NotASemitoneException::what() const noexcept
 {
 	return m_str.c_str();
 }

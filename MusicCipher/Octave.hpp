@@ -17,7 +17,7 @@ class NotASemitoneException : std::exception
 {
 public:
 	NotASemitoneException(QString const& str);
-	const char *what() const;
+	const char *what() const noexcept;
 
 private:
 	std::string const m_str;
