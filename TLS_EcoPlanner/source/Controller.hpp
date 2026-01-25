@@ -8,6 +8,7 @@
 #include <QObject>
 
 #include <memory>
+#include <qabstractitemmodel.h>
 
 class StageModel;
 class History;
