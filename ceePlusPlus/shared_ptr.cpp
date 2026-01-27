@@ -3,7 +3,6 @@
 
 struct Bar {
 	char c = '.';
-	    // some data that we want to point to
 };
 
 struct Foo {
