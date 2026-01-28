@@ -8,7 +8,7 @@ set(CMAKE_AUTORCC ON)
 
 enable_testing()
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(MusicCipherUnitTests main.cpp
@@ -21,13 +21,15 @@ add_test(NAME MusicCipherUnitTests COMMAND MusicCipherUnitTests)
 if (DEFINED ENV{BOOST_INCLUDE_DIR})
     set(BOOST_INCLUDE_DIR $ENV{BOOST_INCLUDE_DIR})
 else ()
-    set(BOOST_INCLUDE_DIR "H:/Programming/vcpkg/installed/x64-windows/include/") # set by Qt Creator wizard
+    set(BOOST_INCLUDE_DIR "G:/Programming/vcpkg/installed/x64-windows/include/") # set by Qt Creator wizard
 endif ()
 if (BOOST_INCLUDE_DIR STREQUAL "")
     message("BOOST_INCLUDE_DIR is not set, assuming Boost can be found automatically in your system")
 elseif (EXISTS ${BOOST_INCLUDE_DIR})
     include_directories(${BOOST_INCLUDE_DIR})
 endif ()
+
+add_compile_definitions(_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING)
 
 include_directories("../MusicCipher") # tested project
 
