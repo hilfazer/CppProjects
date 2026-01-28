@@ -12,3 +12,15 @@ install(TARGETS BoostTestExample
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+
+if (DEFINED ENV{BOOST_INCLUDE_DIR})
+    set(BOOST_INCLUDE_DIR $ENV{BOOST_INCLUDE_DIR})
+else ()
+    set(BOOST_INCLUDE_DIR "G:/Programming/vcpkg/installed/x64-windows/include/") # set by Qt Creator wizard
+endif ()
+if (BOOST_INCLUDE_DIR STREQUAL "")
+    message("BOOST_INCLUDE_DIR is not set, assuming Boost can be found automatically in your system")
+elseif (EXISTS ${BOOST_INCLUDE_DIR})
+    include_directories(${BOOST_INCLUDE_DIR})
+endif ()
