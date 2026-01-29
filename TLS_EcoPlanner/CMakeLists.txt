@@ -56,7 +56,6 @@ include_directories("F:/Libraries/boost_1_86_0")
 find_package(Qt5 REQUIRED COMPONENTS Widgets )
 find_package(Qt5 REQUIRED COMPONENTS XmlPatterns )
 
-add_link_options("-fuse-ld=bfd")
 target_link_libraries(TLS_EcoPlanner PRIVATE Qt5::Widgets)
 target_link_libraries(TLS_EcoPlanner PRIVATE Qt5::XmlPatterns)
 
