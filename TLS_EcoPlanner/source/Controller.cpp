@@ -300,7 +300,7 @@ bool Controller::startNewDayAndAddToHistory(PanicRank rank)
 		return false;
 	}
 
-	std::size_t const dayNumber = m_history->getNumberOfDays() + 1;
+	auto const dayNumber = static_cast<unsigned>( m_history->getNumberOfDays() + 1 );
 
 	auto action = std::make_unique<DayStartAction>(*m_stage, dayNumber, rank, *m_gameData);
 
