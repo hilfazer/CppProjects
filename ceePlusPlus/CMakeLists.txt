@@ -5,6 +5,9 @@ project(ceePlusPlus LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# multiprocess build
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+
 add_executable(ceePlusPlus main.cpp
     noisy_type.hpp shared_ptr.cpp)
 
