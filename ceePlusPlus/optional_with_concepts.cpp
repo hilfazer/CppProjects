@@ -5,6 +5,7 @@ template<typename T>
 class optional {
 public:
 	optional(const T& val) {}
+	optional(const optional&) requires(std::is_trivially_constructible_v<T>) = default;
 };
 
 
