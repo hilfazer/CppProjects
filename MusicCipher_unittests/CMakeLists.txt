@@ -33,6 +33,6 @@ add_compile_definitions(_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING)
 
 include_directories("../MusicCipher") # tested project
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets )
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
-target_link_libraries(MusicCipherUnitTests PRIVATE Qt5::Widgets)
+target_link_libraries(MusicCipherUnitTests PRIVATE Qt6::Core)
