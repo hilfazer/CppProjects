@@ -21,8 +21,24 @@ Calculator::Calculator(
 	for(std::size_t i = 0; i < 10; ++i) {
 		QString butName = "button" + QString::number(i);
 		numButtons[i] = Calculator::findChild<QPushButton*>(butName);
-		connect( numButtons[i], SIGNAL(released()), this, SLOT(numPressed()) );
+		connect( numButtons[i], SIGNAL(released()),
+				this, SLOT(numPressed()) );
 	}
+
+	connect( ui->add, SIGNAL(released()),
+			this, SLOT(mathButtonPressed()) );
+	connect( ui->substract, SIGNAL(released()),
+			this, SLOT(mathButtonPressed()) );
+	connect( ui->multiply, SIGNAL(released()),
+			this, SLOT(mathButtonPressed()) );
+	connect( ui->divide, SIGNAL(released()),
+			this, SLOT(mathButtonPressed()) );
+
+	connect( ui->equals, SIGNAL(released()),
+			this, SLOT(equalButton()) );
+
+	connect( ui->changeSign, &QPushButton::released,
+			this, &Calculator::changeNumberSign );
 }
 
 Calculator::~Calculator()
@@ -90,5 +106,12 @@ void Calculator::equalButton()
 
 void Calculator::changeNumberSign()
 {
+	QString displayVal = ui->display->text();
+	QRegExp reg("[-]?[0-9.]*");
 
+	if(reg.exactMatch(displayVal)) {
+		double dblDisplayVal = displayVal.toDouble();
+		double dblDisplayValSign = -1 * dblDisplayVal;
+		ui->display->setText(QString::number(dblDisplayValSign));
+	}
 }
