@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="4">
-     <widget class="QPushButton" name="memAdd">
+     <widget class="QPushButton" name="memSet">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -632,7 +632,7 @@ QPushButton:pressed{
   <tabstop>substract</tabstop>
   <tabstop>add</tabstop>
   <tabstop>button5</tabstop>
-  <tabstop>memAdd</tabstop>
+  <tabstop>memSet</tabstop>
   <tabstop>button4</tabstop>
   <tabstop>memClear</tabstop>
   <tabstop>clear</tabstop>

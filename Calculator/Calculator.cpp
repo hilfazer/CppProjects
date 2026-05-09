@@ -50,6 +50,13 @@ Calculator::Calculator(
 
 	connect( ui->clear, &QPushButton::released,
 			this, &Calculator::clearDisplay );
+
+	connect( ui->memSet, &QPushButton::released,
+			this, &Calculator::memorySet );
+	connect( ui->memGet, &QPushButton::released,
+			this, &Calculator::memoryGet );
+	connect( ui->memClear, &QPushButton::released,
+			this, &Calculator::memoryClear );
 }
 
 Calculator::~Calculator()
@@ -114,4 +121,21 @@ void Calculator::changeNumberSign()
 void Calculator::clearDisplay()
 {
 	ui->display->setText("0");
+}
+
+void Calculator::memorySet()
+{
+	QString const displayVal = ui->display->text();
+	memory = displayVal.toDouble();
+}
+
+void Calculator::memoryClear()
+{
+	memory.reset();
+}
+
+void Calculator::memoryGet()
+{
+	if (memory)
+		ui->display->setText(QString::number(*memory));
 }
