@@ -1,6 +1,8 @@
 #include "Calculator.hpp"
 #include "./ui_Calculator.h"
 
+#include <QRegularExpression>
+
 
 namespace {
 
@@ -98,10 +100,11 @@ void Calculator::equalButtonPressed()
 
 void Calculator::changeNumberSign()
 {
-	QString displayVal = ui->display->text();
-	QRegExp reg("[-]?[0-9.]*");
+	QString const displayVal = ui->display->text();
+	static const QRegularExpression reg("[-]?[0-9.]*");
+	const QRegularExpressionMatch match = reg.match(displayVal);
 
-	if(reg.exactMatch(displayVal)) {
+	if(match.hasMatch()) {
 		double dblDisplayVal = displayVal.toDouble();
 		double dblDisplayValSign = -1 * dblDisplayVal;
 		ui->display->setText(QString::number(dblDisplayValSign));
