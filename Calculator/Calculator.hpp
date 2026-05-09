@@ -25,9 +25,7 @@ private slots:
 private:
 	Ui::Calculator *ui;
 	double calcVal = 0.0;
-	bool divTrigger = false;
-	bool multTrigger = false;
-	bool addTrigger = false;
-	bool subTrigger = false;
+	const QChar NoTriggerChar = '\0';
+	QChar currentTrigger = NoTriggerChar;
 };
 #endif // CALCULATOR_HPP

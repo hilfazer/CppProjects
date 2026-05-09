@@ -2,6 +2,18 @@
 #include "./ui_Calculator.h"
 
 
+namespace {
+
+std::map<QChar, std::function<double(double, double)>> const BinaryOperations =
+{
+	{'+', [](auto a, auto b) -> auto { return a + b; }},
+	{'-', [](auto a, auto b) -> auto { return a - b; }},
+	{'*', [](auto a, auto b) -> auto { return a * b; }},
+	{'/', [](auto a, auto b) -> auto { return a / b; }},
+};
+
+}
+
 Calculator::Calculator(
 	QWidget *parent)
 	: QMainWindow(parent)
@@ -60,24 +72,14 @@ void Calculator::numPressed()
 
 void Calculator::mathButtonPressed()
 {
-	divTrigger = false;
-	multTrigger = false;
-	addTrigger = false;
-	subTrigger = false;
+	currentTrigger = NoTriggerChar;
 	QString displayVal = ui->display->text();
 	calcVal = displayVal.toDouble();
 	QPushButton* button = (QPushButton*)sender();
 	QString butVal = button->text();
 
-	if(QString::compare(butVal, "/", Qt::CaseInsensitive) == 0) {
-		divTrigger = true;
-	} else if(QString::compare(butVal, "*", Qt::CaseInsensitive) == 0) {
-		multTrigger = true;
-	} else if(QString::compare(butVal, "+", Qt::CaseInsensitive) == 0) {
-		addTrigger = true;
-	} else if(QString::compare(butVal, "-", Qt::CaseInsensitive) == 0) {
-		subTrigger = true;
-	}
+	assert(butVal.size() == 1);
+	currentTrigger = butVal[0];
 	ui->display->setText("");
 }
 
@@ -87,15 +89,10 @@ void Calculator::equalButtonPressed()
 	QString displayVal = ui->display->text();
 	double dblDisplayVal = displayVal.toDouble();
 
-	if(addTrigger){
-		solution = calcVal + dblDisplayVal;
-	} else if(subTrigger){
-		solution = calcVal - dblDisplayVal;
-	} else if(multTrigger){
-		solution = calcVal * dblDisplayVal;
-	} else if(divTrigger){
-		solution = calcVal / dblDisplayVal;
+	if (BinaryOperations.contains(currentTrigger) ) {
+		solution = BinaryOperations.at(currentTrigger)(calcVal, dblDisplayVal);
 	}
+
 	ui->display->setText(QString::number(solution));
 }
 
