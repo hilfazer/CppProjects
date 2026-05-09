@@ -23,5 +23,6 @@ private slots:
 	void mathButtonPressed();
 	void equalButton();
 	void changeNumberSign();
+	void clearDisplay();
 };
 #endif // CALCULATOR_HPP

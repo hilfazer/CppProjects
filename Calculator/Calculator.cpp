@@ -39,6 +39,9 @@ Calculator::Calculator(
 
 	connect( ui->changeSign, &QPushButton::released,
 			this, &Calculator::changeNumberSign );
+
+	connect( ui->clear, &QPushButton::released,
+			this, &Calculator::clearDisplay );
 }
 
 Calculator::~Calculator()
@@ -114,4 +117,9 @@ void Calculator::changeNumberSign()
 		double dblDisplayValSign = -1 * dblDisplayVal;
 		ui->display->setText(QString::number(dblDisplayValSign));
 	}
+}
+
+void Calculator::clearDisplay()
+{
+	ui->display->setText("0");
 }
