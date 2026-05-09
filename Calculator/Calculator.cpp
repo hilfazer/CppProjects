@@ -2,12 +2,6 @@
 #include "./ui_Calculator.h"
 
 
-double calcVal = 0.0;
-bool divTrigger = false;
-bool multTrigger = false;
-bool addTrigger = false;
-bool subTrigger = false;
-
 Calculator::Calculator(
 	QWidget *parent)
 	: QMainWindow(parent)
@@ -21,21 +15,21 @@ Calculator::Calculator(
 	for(std::size_t i = 0; i < 10; ++i) {
 		QString butName = "button" + QString::number(i);
 		numButtons[i] = Calculator::findChild<QPushButton*>(butName);
-		connect( numButtons[i], SIGNAL(released()),
-				this, SLOT(numPressed()) );
+		connect( numButtons[i], &QPushButton::released,
+				this, &Calculator::numPressed );
 	}
 
-	connect( ui->add, SIGNAL(released()),
-			this, SLOT(mathButtonPressed()) );
-	connect( ui->substract, SIGNAL(released()),
-			this, SLOT(mathButtonPressed()) );
-	connect( ui->multiply, SIGNAL(released()),
-			this, SLOT(mathButtonPressed()) );
-	connect( ui->divide, SIGNAL(released()),
-			this, SLOT(mathButtonPressed()) );
+	connect( ui->add, &QPushButton::released,
+			this, &Calculator::mathButtonPressed );
+	connect( ui->substract, &QPushButton::released,
+			this, &Calculator::mathButtonPressed );
+	connect( ui->multiply, &QPushButton::released,
+			this, &Calculator::mathButtonPressed );
+	connect( ui->divide, &QPushButton::released,
+			this, &Calculator::mathButtonPressed );
 
-	connect( ui->equals, SIGNAL(released()),
-			this, SLOT(equalButton()) );
+	connect( ui->equals, &QPushButton::released,
+			this, &Calculator::equalButtonPressed );
 
 	connect( ui->changeSign, &QPushButton::released,
 			this, &Calculator::changeNumberSign );
@@ -87,22 +81,20 @@ void Calculator::mathButtonPressed()
 	ui->display->setText("");
 }
 
-void Calculator::equalButton()
+void Calculator::equalButtonPressed()
 {
 	double solution = 0.0;
 	QString displayVal = ui->display->text();
 	double dblDisplayVal = displayVal.toDouble();
 
-	if(addTrigger || subTrigger || multTrigger || divTrigger) {
-		if(addTrigger){
-			solution = calcVal + dblDisplayVal;
-		} else if(subTrigger){
-			solution = calcVal - dblDisplayVal;
-		} else if(multTrigger){
-			solution = calcVal * dblDisplayVal;
-		} else if(divTrigger){
-			solution = calcVal / dblDisplayVal;
-		}
+	if(addTrigger){
+		solution = calcVal + dblDisplayVal;
+	} else if(subTrigger){
+		solution = calcVal - dblDisplayVal;
+	} else if(multTrigger){
+		solution = calcVal * dblDisplayVal;
+	} else if(divTrigger){
+		solution = calcVal / dblDisplayVal;
 	}
 	ui->display->setText(QString::number(solution));
 }

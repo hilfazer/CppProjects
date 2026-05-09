@@ -15,14 +15,19 @@ public:
 	Calculator(QWidget *parent = nullptr);
 	~Calculator();
 
-private:
-	Ui::Calculator *ui;
-
 private slots:
 	void numPressed();
 	void mathButtonPressed();
-	void equalButton();
+	void equalButtonPressed();
 	void changeNumberSign();
 	void clearDisplay();
+
+private:
+	Ui::Calculator *ui;
+	double calcVal = 0.0;
+	bool divTrigger = false;
+	bool multTrigger = false;
+	bool addTrigger = false;
+	bool subTrigger = false;
 };
 #endif // CALCULATOR_HPP
