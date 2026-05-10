@@ -9,7 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
 
 add_executable(ceePlusPlus main.cpp
-    noisy_type.hpp shared_ptr.cpp)
+    noisy_type.hpp shared_ptr.cpp
+    optional_with_concepts.cpp)
 
 include(GNUInstallDirs)
 install(TARGETS ceePlusPlus
