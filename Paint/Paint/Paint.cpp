@@ -1,6 +1,5 @@
 #include "Paint.hpp"
 
-class ScribbleArea;
 
 Paint::Paint(QWidget *parent)
     : QMainWindow(parent)
