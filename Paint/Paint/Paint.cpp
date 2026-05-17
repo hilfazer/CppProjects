@@ -1,7 +1,6 @@
 #include "Paint.hpp"
 #include "ScribbleArea.hpp"
 
-#include <QtGlobal> // dla Q_UNUSED
 #include <QCloseEvent>
 #include <QColorDialog>
 #include <QFileDialog>

@@ -12,7 +12,7 @@ find_package(Qt${QT_VERSION_MAJOR}
         Core
         Gui
         Widgets
-        Qt5PrintSupport
+        PrintSupport
 )
 qt_standard_project_setup()
 
@@ -22,6 +22,7 @@ set(PROJECT_SOURCES
     Paint.hpp
     Paint.cpp
     ScribbleArea.hpp
+    ScribbleArea.cpp
 )
 
 qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
@@ -36,5 +37,6 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::PrintSupport
 )
 
