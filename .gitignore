@@ -5,6 +5,7 @@
 
 CMakeLists.txt.user
 
+_build
 _builds
 *-build-*
 _build
