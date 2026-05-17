@@ -41,4 +41,4 @@ private:
 	QColor myPenColor;
 	QImage image;
 	QPoint lastPoint;
-}
+};

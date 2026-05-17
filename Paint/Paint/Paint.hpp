@@ -42,5 +42,6 @@ private:
 	QAction* aboutAct;
 	QAction* aboutQtAct;
 	QAction* printAct;
+	QAction* clearScreenAct;
 };
 

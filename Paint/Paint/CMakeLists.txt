@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
     Paint.ui
     Paint.hpp
     Paint.cpp
+    ScribbleArea.hpp
 )
 
 qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
