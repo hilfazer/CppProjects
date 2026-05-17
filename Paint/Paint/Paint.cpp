@@ -13,13 +13,12 @@
 Paint::Paint(QWidget *parent)
     : QMainWindow(parent)
 {
-	scribbleArea = new ScribbleArea;
+	scribbleArea = new ScribbleArea(this);
 	setCentralWidget(scribbleArea);
 	createActions();
 	createMenus();
 	setWindowTitle(tr("Scribble"));
     resize(500, 500);
-    //setupUi(this);
 }
 
 Paint::~Paint()
@@ -68,7 +67,6 @@ void Paint::penWidth()
     if (ok) {
         scribbleArea->setPenWidth(newWidth);
 	}
-
 }
 
 void Paint::about()
@@ -86,7 +84,8 @@ void Paint::createActions()
 	openAct = new QAction(tr("Open"), this);
 	openAct->setShortcuts(QKeySequence::Open);
 	connect(openAct, &QAction::triggered, this, &Paint::open);
-	foreach(QByteArray format, QImageWriter::supportedImageFormats()) {
+	
+	for (const QByteArray &format : QImageWriter::supportedImageFormats()) {
 		QString text = tr("%1...").arg(QString(format)).toUpper();
 		QAction* action = new QAction(text, this);
 		action->setData(format);
@@ -102,17 +101,17 @@ void Paint::createActions()
 	connect(exitAct, &QAction::triggered, this, &Paint::close);
 
 	penColorAct = new QAction(tr("&Pen Color..."), this);
-	connect(penColorAct, &QAction::triggered, scribbleArea, &ScribbleArea::penColor);
+	connect(penColorAct, &QAction::triggered, this, &Paint::penColor);
 
 	penWidthAct = new QAction(tr("&Pen Width..."), this);
-	connect(penWidthAct, &QAction::triggered, scribbleArea, &ScribbleArea::penWidth);
+	connect(penWidthAct, &QAction::triggered, this, &Paint::penWidth);
 
 	clearScreenAct = new QAction(tr("&Clear Screen..."), this);
 	clearScreenAct->setShortcut(tr("Ctrl+L"));
-	connect(clearScreenAct, &QAction::triggered, scribbleArea, &ScribbleArea::penColor);
+	connect(clearScreenAct, &QAction::triggered, scribbleArea, &ScribbleArea::clearImage);
 
 	aboutAct = new QAction(tr("&About..."), this);
-	connect(aboutAct, &QAction::triggered, &Paint::about);
+	connect(aboutAct, &QAction::triggered, this, &Paint::about);
 
 	aboutQtAct = new QAction(tr("About &Qt..."), this);
 	connect(aboutQtAct, &QAction::triggered, qApp, &QApplication::aboutQt);
